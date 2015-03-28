@@ -37,7 +37,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:text="Tap + to create a new item"
+			android:text="Tap + to add a new offer"
 			android:id="@+id/textView8"
 			android:layout_marginTop="16dp" />
 	</LinearLayout>
