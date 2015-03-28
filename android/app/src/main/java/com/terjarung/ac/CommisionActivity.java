@@ -1,5 +1,6 @@
 package com.terjarung.ac;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.terjarung.App;
 import com.terjarung.R;
 import com.terjarung.rpc.Server;
 import com.terjarung.rpc.YukuLayer;
@@ -28,6 +30,11 @@ public class CommisionActivity extends ActionBarActivity {
 	PhonesToSellAdapter adapter;
 	YukuLayer.PhoneToSell[] phones;
 	int profit = 100;
+	View bCancel;
+	View bFinish;
+	YukuLayer.Plan plan;
+	int op;
+	String exp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,22 @@ public class CommisionActivity extends ActionBarActivity {
 		});
 
 		tProfit.setText("" + profit);
+
+		bCancel = V.get(this, R.id.bCancel);
+		bCancel.setOnClickListener(v -> finish());
+		bFinish = V.get(this, R.id.bFinish);
+		bFinish.setOnClickListener(v -> {
+			startActivity(new Intent(App.context, SuccessSellActivity.class)
+					.putExtra("plan", plan)
+					.putExtra("op", op)
+					.putExtra("exp", exp)
+					.putExtra("profit", profit)
+			);
+		});
+
+		plan = getIntent().getParcelableExtra("plan");
+		op = getIntent().getIntExtra("op", 0);
+		exp = getIntent().getStringExtra("exp");
 
 		reload();
 	}

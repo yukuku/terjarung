@@ -28,7 +28,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:text="Wooldans"
+			android:text="Woodlands"
 			android:id="@+id/tArea"
 			android:textSize="14dp" />
 
