@@ -19,8 +19,8 @@
 		<Button
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:text="Back"
-			android:id="@+id/button3"
+			android:text="Previous"
+			android:id="@+id/bPrev"
 			android:layout_gravity="center_vertical"
 			android:layout_weight="1"
 			style="?android:buttonBarButtonStyle" />
@@ -29,7 +29,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:text="Next"
-			android:id="@+id/button4"
+			android:id="@+id/bNext"
 			android:layout_gravity="center_vertical"
 			android:layout_weight="1"
 			style="?android:buttonBarButtonStyle" />

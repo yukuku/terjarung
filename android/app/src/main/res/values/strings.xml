@@ -6,4 +6,6 @@
 	<string name="title_activity_plans">PlansActivity</string>
 	<string name="title_activity_phones">PhonesActivity</string>
 	<string name="title_activity_commision">CommisionActivity</string>
+	<string name="title_activity_buy">BuyActivity</string>
+	<string name="title_activity_sellers">SellersActivity</string>
 </resources>

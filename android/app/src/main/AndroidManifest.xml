@@ -30,13 +30,21 @@
             android:label="Add new plan" />
         <activity
             android:name=".ac.PhonesActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_phones" >
         </activity>
         <activity
             android:name=".ac.CommisionActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="Offer your phones" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Set Earnings" >
+        </activity>
+        <activity
+            android:name=".ac.BuyActivity"
+            android:label="@string/title_activity_buy" >
+        </activity>
+        <activity
+            android:name=".ac.SellersActivity"
+            android:label="@string/title_activity_sellers" >
         </activity>
     </application>
 

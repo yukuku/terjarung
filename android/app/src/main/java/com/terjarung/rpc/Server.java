@@ -27,8 +27,8 @@ public class Server {
 		};
 
 		final RestAdapter restAdapter = new RestAdapter.Builder()
-			.setLogLevel(BuildConfig.DEBUG? RestAdapter.LogLevel.FULL: RestAdapter.LogLevel.NONE)
-			.setEndpoint("http://terjarung.appspot.com")
+			.setLogLevel(RestAdapter.LogLevel.FULL)
+			.setEndpoint("http://10.0.3.2:20080")
 			.setRequestInterceptor(requestInterceptor)
 			.build();
 

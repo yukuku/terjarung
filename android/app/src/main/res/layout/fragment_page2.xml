@@ -3,34 +3,43 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#333"
     android:orientation="vertical"
     android:weightSum="1">
-
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-        android:textColor="#fff"
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:text="Your current plan"
-		android:id="@+id/textView" />
 
 	<Spinner
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/cbPlan" />
-
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:text="Plan details"
-		android:id="@+id/textView2" />
+		android:id="@+id/cbPlans" />
 
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:textAppearance="?android:attr/textAppearanceSmall"
 		android:text="80 mins talktime\n1999 SMS\n8 GB data\n$88 per month"
-		android:id="@+id/tPlanDetails" />
+		android:id="@+id/tPlanDetails"
+		android:layout_marginLeft="16dp"
+		android:layout_marginTop="8dp" />
+
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:text="Recontract on"
+		android:id="@+id/textView"
+		android:layout_marginTop="32dp"
+		android:textSize="18dp"
+		android:layout_gravity="center_horizontal" />
+
+	<TextView
+			android:id="@+id/textView3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+		android:text="12 Dec 2015"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:textSize="40dp"
+		android:layout_gravity="center_horizontal" />
+
+
+
 </LinearLayout>

@@ -28,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
 			startActivity(new Intent(App.context, PlansActivity.class));
 		});
 		bBuy.setOnClickListener(v -> {
-			startActivity(new Intent(App.context, PlansActivity.class));
+			startActivity(new Intent(App.context, PhonesActivity.class));
 		});
 	}
 
