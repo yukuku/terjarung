@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#333"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+        android:textColor="#fff"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:text="Your current plan"
+		android:id="@+id/textView" />
+
+	<Spinner
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/cbPlan" />
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:text="Plan details"
+		android:id="@+id/textView2" />
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:text="80 mins talktime\n1999 SMS\n8 GB data\n$88 per month"
+		android:id="@+id/tPlanDetails" />
+</LinearLayout>

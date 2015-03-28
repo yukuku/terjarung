@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#333"
+	android:orientation="vertical">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff"
+		android:text="Operator"
+		android:id="@+id/textView" />
+
+	<FrameLayout
+		android:id="@+id/panelOperator1"
+		android:layout_width="match_parent"
+		android:layout_height="120dp"
+		android:layout_gravity="center_horizontal">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="Singtel"
+			android:layout_gravity="center_horizontal|top" />
+	</FrameLayout>
+
+	<FrameLayout
+		android:id="@+id/panelOperator2"
+		android:layout_width="match_parent"
+		android:layout_height="120dp"
+		android:layout_gravity="center_horizontal">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="M1"
+			android:layout_gravity="center_horizontal|top"
+			android:id="@+id/zz67183" />
+	</FrameLayout>
+
+	<FrameLayout
+		android:id="@+id/panelOperator3"
+		android:layout_width="match_parent"
+		android:layout_height="120dp"
+		android:layout_gravity="center_horizontal">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="Starhub"
+			android:layout_gravity="center_horizontal|top"
+			android:id="@+id/zz13456" />
+	</FrameLayout>
+</LinearLayout>
