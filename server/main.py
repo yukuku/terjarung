@@ -73,15 +73,27 @@ class DataPlansHandler(ApiHandler):
 
 class AvailablePhonesHandler(ApiHandler):
     def handle(self):
-        return [
-            {
+        res = []
+        os = [o for o in Offer.query()]
+        for p in phone_data.phones:
+            el = {
                 'id': p[0],
                 'name': p[1],
                 'img': p[2],
-                'price': random.randint(10, 99) * 10,
             }
-            for p in phone_data.phones
-        ]
+
+            price = 9e9
+            base_prices = phone_data.pp[p[0]-1]
+            for o in os:
+                harga = base_prices[json.loads(o.plan)['id']-1] + o.profit
+                if harga < price:
+                    price = harga
+
+            el['price'] = price
+
+            res.append(el)
+
+        return res
 
 
 class PhonesToSellHandler(ApiHandler):

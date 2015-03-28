@@ -28,10 +28,14 @@ public class Server {
 
 		final RestAdapter restAdapter = new RestAdapter.Builder()
 			.setLogLevel(RestAdapter.LogLevel.FULL)
-			.setEndpoint("http://10.0.3.2:20080")
+			.setEndpoint(Preferences.getString(Prefkeys.baseurl, "http://10.0.3.2:20080"))
 			.setRequestInterceptor(requestInterceptor)
 			.build();
 
 		return restAdapter.create(YukuLayer.class);
+	}
+
+	public static void reloadBaseurl() {
+		yukuLayer = newYukuLayer();
 	}
 }

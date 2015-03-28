@@ -11,11 +11,27 @@
 		android:title="Login as Seller 2"
 		app:showAsAction="never" />
 	<item
+		android:id="@+id/menuLoginSeller3"
+		android:title="Login as Seller 3"
+		app:showAsAction="never" />
+	<item
+		android:id="@+id/menuLoginSeller4"
+		android:title="Login as Seller 4"
+		app:showAsAction="never" />
+	<item
 		android:id="@+id/menuLoginBuyer"
 		android:title="Login as Buyer"
 		app:showAsAction="never" />
 	<item
 		android:id="@+id/menuLoginBuyer2"
 		android:title="Login as Buyer 2"
+		app:showAsAction="never" />
+	<item
+		android:id="@+id/menuHost"
+		android:title="10.0.3.2"
+		app:showAsAction="never" />
+	<item
+		android:id="@+id/menuAppspot"
+		android:title="appspot"
 		app:showAsAction="never" />
 </menu>

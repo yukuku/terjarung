@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import com.terjarung.App;
 import com.terjarung.R;
+import com.terjarung.rpc.Server;
 import com.terjarung.storage.Prefkeys;
 import yuku.afw.V;
 import yuku.afw.storage.Preferences;
@@ -56,11 +57,25 @@ public class MainActivity extends ActionBarActivity {
 			case R.id.menuLoginSeller2:
 				Preferences.setString(Prefkeys.authtoken, "seller2");
 				return true;
+			case R.id.menuLoginSeller3:
+				Preferences.setString(Prefkeys.authtoken, "seller3");
+				return true;
+			case R.id.menuLoginSeller4:
+				Preferences.setString(Prefkeys.authtoken, "seller4");
+				return true;
 			case R.id.menuLoginBuyer:
 				Preferences.setString(Prefkeys.authtoken, "buyer1");
 				return true;
 			case R.id.menuLoginBuyer2:
 				Preferences.setString(Prefkeys.authtoken, "buyer2");
+				return true;
+			case R.id.menuHost:
+				Preferences.setString(Prefkeys.baseurl, "http://10.0.3.2:20080");
+				Server.reloadBaseurl();
+				return true;
+			case R.id.menuAppspot:
+				Preferences.setString(Prefkeys.baseurl, "http://terjarung.appspot.com");
+				Server.reloadBaseurl();
 				return true;
 		}
 
