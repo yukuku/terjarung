@@ -1,5 +1,7 @@
 package com.terjarung.ac;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.terjarung.App;
 import com.terjarung.R;
 import com.terjarung.rpc.Server;
@@ -21,6 +24,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import yuku.afw.V;
 import yuku.afw.widget.EasyAdapter;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CommisionActivity extends ActionBarActivity {
 	static final String TAG = CommisionActivity.class.getSimpleName();
@@ -73,12 +78,33 @@ public class CommisionActivity extends ActionBarActivity {
 		bCancel.setOnClickListener(v -> finish());
 		bFinish = V.get(this, R.id.bFinish);
 		bFinish.setOnClickListener(v -> {
-			startActivity(new Intent(App.context, SuccessSellActivity.class)
-					.putExtra("plan", plan)
-					.putExtra("op", op)
-					.putExtra("exp", exp)
-					.putExtra("profit", profit)
-			);
+			AtomicBoolean cancelled = new AtomicBoolean();
+
+			ProgressDialog pd = ProgressDialog.show(this, null, "Processing...", true, true, dialog -> cancelled.set(true));
+			Server.getYukuLayer().my_offer_add(new Gson().toJson(plan), op, exp, profit, new Callback<YukuLayer.SellersResult>() {
+				@Override
+				public void success(final YukuLayer.SellersResult sellersResult, final Response response) {
+					pd.dismiss();
+					if (cancelled.get()) return;
+
+					startActivity(new Intent(App.context, SuccessSellActivity.class)
+							.putExtra("plan", plan)
+							.putExtra("op", op)
+							.putExtra("exp", exp)
+							.putExtra("profit", profit)
+					);
+				}
+
+				@Override
+				public void failure(final RetrofitError error) {
+					pd.dismiss();
+					if (cancelled.get()) return;
+					new AlertDialog.Builder(CommisionActivity.this)
+						.setMessage(error.getMessage())
+						.setPositiveButton("OK", null)
+						.show();
+				}
+			});
 		});
 
 		plan = getIntent().getParcelableExtra("plan");

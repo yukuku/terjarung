@@ -5,7 +5,11 @@
 	android:layout_height="match_parent"
 	tools:context="com.terjarung.ac.PlansActivity">
 
-	<ListView
+	<com.fortysevendeg.swipelistview.SwipeListView
+		app:swipeFrontView="@+id/front"
+		app:swipeBackView="@+id/back"
+		app:swipeActionLeft="dismiss"
+		app:swipeActionRight="dismiss"
 		android:id="@+id/lsPlans"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

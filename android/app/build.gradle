@@ -12,6 +12,7 @@ buildscript {
 repositories {
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url 'http://clinker.47deg.com/nexus/content/groups/public' }
 }
 
 apply plugin: 'com.android.application'
@@ -51,4 +52,7 @@ dependencies {
     compile 'com.braintreepayments.api:braintree:1.+'
     compile 'com.getbase:floatingactionbutton:1.9.0'
     compile project(':Afw')
+    compile ('com.fortysevendeg.swipelistview:swipelistview:1.0-SNAPSHOT@aar') {
+        transitive = true
+    }
 }

@@ -12,6 +12,7 @@ IS_DEVELOPMENT_SERVER = os.environ['SERVER_SOFTWARE'].startswith('Development')
 
 class ApiHandler(webapp2.RequestHandler):
     def get(self):
+        self.user=self.request.headers.get('authtoken', '')
         self.response.headers['Content-type'] = 'application/json'
         result = self.handle()
         self.response.write(json.dumps(result, indent=2))

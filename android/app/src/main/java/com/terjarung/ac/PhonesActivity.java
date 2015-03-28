@@ -31,8 +31,10 @@ public class PhonesActivity extends ActionBarActivity {
 
 		lsPhones = V.get(this, R.id.lsPhones);
 		lsPhones.setAdapter(adapter = new PhonesAdapter());
-		lsPhones.setOnItemClickListener((parent,view,position,id) -> {
-			startActivity(new Intent(App.context, SellersActivity.class));
+		lsPhones.setOnItemClickListener((parent, view, position, id) -> {
+			startActivity(new Intent(App.context, SellersActivity.class)
+				.putExtra("phone", phones[position])
+			);
 		});
 
 		reload();

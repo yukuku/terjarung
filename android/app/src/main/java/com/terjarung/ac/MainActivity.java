@@ -8,7 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import com.terjarung.App;
 import com.terjarung.R;
+import com.terjarung.storage.Prefkeys;
 import yuku.afw.V;
+import yuku.afw.storage.Preferences;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -47,9 +49,19 @@ public class MainActivity extends ActionBarActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
+		switch (id) {
+			case R.id.menuLoginSeller:
+				Preferences.setString(Prefkeys.authtoken, "seller1");
+				return true;
+			case R.id.menuLoginSeller2:
+				Preferences.setString(Prefkeys.authtoken, "seller2");
+				return true;
+			case R.id.menuLoginBuyer:
+				Preferences.setString(Prefkeys.authtoken, "buyer1");
+				return true;
+			case R.id.menuLoginBuyer2:
+				Preferences.setString(Prefkeys.authtoken, "buyer2");
+				return true;
 		}
 
 		return super.onOptionsItemSelected(item);
