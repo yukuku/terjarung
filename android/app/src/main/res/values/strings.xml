@@ -9,4 +9,5 @@
 	<string name="title_activity_buy">BuyActivity</string>
 	<string name="title_activity_sellers">SellersActivity</string>
 	<string name="title_activity_success_buy">SuccessBuyActivity</string>
+	<string name="title_activity_success_sell">SuccessSellActivity</string>
 </resources>

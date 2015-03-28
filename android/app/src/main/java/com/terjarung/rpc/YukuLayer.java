@@ -14,13 +14,51 @@ public interface YukuLayer {
 	@POST("/payment-method-nonce")
 	void payment_method_nonce(@Query("nonce") String nonce, @Query("amount") String amount, Callback<String> result);
 
-	public static class Plan {
+	public static class Plan implements Parcelable {
+
 		public long id;
 		public String name;
 		public String call;
 		public String sms;
 		public String monthly;
 		public String quota;
+
+		@Override
+		public int describeContents() {
+			return 0;
+		}
+
+		@Override
+		public void writeToParcel(Parcel dest, int flags) {
+			dest.writeLong(this.id);
+			dest.writeString(this.name);
+			dest.writeString(this.call);
+			dest.writeString(this.sms);
+			dest.writeString(this.monthly);
+			dest.writeString(this.quota);
+		}
+
+		public Plan() {
+		}
+
+		private Plan(Parcel in) {
+			this.id = in.readLong();
+			this.name = in.readString();
+			this.call = in.readString();
+			this.sms = in.readString();
+			this.monthly = in.readString();
+			this.quota = in.readString();
+		}
+
+		public static final Parcelable.Creator<Plan> CREATOR = new Parcelable.Creator<Plan>() {
+			public Plan createFromParcel(Parcel source) {
+				return new Plan(source);
+			}
+
+			public Plan[] newArray(int size) {
+				return new Plan[size];
+			}
+		};
 	}
 
 	@POST("/data/plans")
@@ -122,4 +160,5 @@ public interface YukuLayer {
 
 	@POST("/sellers")
 	void sellers(Callback<SellersResult> result);
+
 }

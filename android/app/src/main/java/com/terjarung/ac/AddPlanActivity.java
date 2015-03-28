@@ -1,5 +1,7 @@
 package com.terjarung.ac;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,11 +10,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.terjarung.App;
@@ -25,6 +29,8 @@ import retrofit.client.Response;
 import yuku.afw.V;
 import yuku.afw.widget.EasyAdapter;
 
+import java.util.Date;
+
 public class AddPlanActivity extends ActionBarActivity {
 	ViewPager viewPager;
 
@@ -32,9 +38,23 @@ public class AddPlanActivity extends ActionBarActivity {
 	View bNext;
 
 	TutorialAdapter adapter;
+	YukuLayer.Plan plan;
+	int op = 0;
+	private DatePicker datePicker;
+	String exp;
 
 	public static Intent createIntent() {
 		return new Intent(App.context, AddPlanActivity.class);
+	}
+
+	void dt() {
+		if (datePicker == null) return;
+
+		final Date date = new Date();
+		date.setYear(datePicker.getYear() - 1900);
+		date.setMonth(datePicker.getMonth());
+		date.setDate(datePicker.getDayOfMonth());
+		exp = DateFormat.getMediumDateFormat(this).format(date);
 	}
 
 	@Override
@@ -79,13 +99,42 @@ public class AddPlanActivity extends ActionBarActivity {
 
 			}
 		};
+
 		viewPager.setOnPageChangeListener(onpagechange);
 		onpagechange.onPageSelected(0);
 	}
 
 	void done() {
-		// TODO verify
-		startActivity(new Intent(App.context, CommisionActivity.class));
+		if (this.plan != null && this.op != 0) {
+			dt();
+
+			startActivity(new Intent(App.context, CommisionActivity.class)
+				.putExtra("plan", plan)
+				.putExtra("op", op)
+				.putExtra("exp", exp)
+			);
+		} else {
+			new AlertDialog.Builder(this)
+				.setMessage("Select provider and your current plan.")
+				.setPositiveButton("OK", null)
+				.show();
+		}
+	}
+
+	public void setPlan(final YukuLayer.Plan plan) {
+		this.plan = plan;
+	}
+
+	public void setOp(final int op) {
+		this.op = op;
+	}
+
+	public void setDatePicker(final DatePicker datePicker) {
+		this.datePicker = datePicker;
+	}
+
+	public DatePicker getDatePicker() {
+		return datePicker;
 	}
 
 	class TutorialAdapter extends FragmentStatePagerAdapter {
@@ -123,6 +172,14 @@ public class AddPlanActivity extends ActionBarActivity {
 	}
 
 	public static class Page1Fragment extends Fragment {
+		private AddPlanActivity activity;
+
+		@Override
+		public void onAttach(final Activity activity) {
+			super.onAttach(activity);
+			this.activity = (AddPlanActivity) activity;
+		}
+
 		@Override
 		public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
 			return inflater.inflate(R.layout.fragment_page1, container, false);
@@ -141,6 +198,7 @@ public class AddPlanActivity extends ActionBarActivity {
 				panelOperator2.setBackgroundColor(0x0);
 				panelOperator3.setBackgroundColor(0x0);
 				v.setBackgroundColor(0x20000000);
+				activity.setOp(v == panelOperator1 ? 1 : v == panelOperator2 ? 2 : 3);
 			};
 
 			panelOperator1.setOnClickListener(vo);
@@ -153,6 +211,14 @@ public class AddPlanActivity extends ActionBarActivity {
 		Spinner cbPlans;
 		private YukuLayer.Plan[] plans;
 		private LayoutInflater inflater;
+		DatePicker datePicker;
+		private AddPlanActivity activity;
+
+		@Override
+		public void onAttach(final Activity activity) {
+			super.onAttach(activity);
+			this.activity = (AddPlanActivity) activity;
+		}
 
 		@Override
 		public void onCreate(final Bundle savedInstanceState) {
@@ -215,6 +281,7 @@ public class AddPlanActivity extends ActionBarActivity {
 				public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
 					final YukuLayer.Plan p = plans[position];
 					tPlanDetails.setText(String.format("$%s / month\n%s mins outgoing calls\n%s local SMS/MMS\n%s local data", p.monthly, p.call, p.sms, p.quota));
+					activity.setPlan(p);
 				}
 
 				@Override
@@ -222,6 +289,9 @@ public class AddPlanActivity extends ActionBarActivity {
 					tPlanDetails.setText("");
 				}
 			});
+
+			datePicker = V.get(view, R.id.datePicker);
+			activity.setDatePicker(datePicker);
 		}
 	}
 }

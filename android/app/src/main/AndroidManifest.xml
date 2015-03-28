@@ -1,55 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.terjarung" >
+<manifest
+	package="com.terjarung"
+	xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.INTERNET" />
 
-    <application
-        android:name=".App"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name=".ac.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+	<application
+		android:name=".App"
+		android:allowBackup="true"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:theme="@style/AppTheme">
+		<activity
+			android:name=".ac.MainActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ac.PlansActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="My Plans" />
-        <activity
-            android:name=".ac.AddPlanActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="Add New Plan" />
-        <activity
-            android:name=".ac.PhonesActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="Choose Your Phone" >
-        </activity>
-        <activity
-            android:name=".ac.CommisionActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="Set Earnings" >
-        </activity>
-        <activity
-            android:name=".ac.BuyActivity"
-            android:label="One Step Away" >
-        </activity>
-        <activity
-            android:name=".ac.SellersActivity"
-            android:label="Seller Listing" >
-        </activity>
-        <activity
-            android:name=".ac.SuccessBuyActivity"
-            android:label="@string/title_activity_success_buy" >
-        </activity>
-    </application>
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ac.PlansActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"
+			android:label="My Plans" />
+		<activity
+			android:name=".ac.AddPlanActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"
+			android:label="Add New Plan" />
+		<activity
+			android:name=".ac.PhonesActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"
+			android:label="Choose Your Phone" />
+		<activity
+			android:name=".ac.CommisionActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"
+			android:label="Set Earnings" />
+		<activity
+			android:name=".ac.BuyActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"
+			android:label="One Step Away" />
+		<activity
+			android:name=".ac.SellersActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"
+			android:label="Seller Listing" />
+		<activity
+			android:name=".ac.SuccessBuyActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"
+			android:label="Payment Successful" />
+		<activity
+			android:name=".ac.SuccessSellActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"
+			android:label="Listing Successful" />
+	</application>
 
 </manifest>
