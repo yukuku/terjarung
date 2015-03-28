@@ -147,9 +147,9 @@ public class AddPlanActivity extends ActionBarActivity {
 		public CharSequence getPageTitle(final int position) {
 			switch (position) {
 				case 0:
-					return "Your service provider";
+					return "Your Service Provider";
 				case 1:
-					return "Your current plan";
+					return "Your Current Plan";
 			}
 			return null;
 		}
