@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import com.braintreepayments.api.dropin.BraintreePaymentActivity;
 import com.braintreepayments.api.dropin.Customization;
+import com.google.gson.Gson;
 import com.terjarung.App;
 import com.terjarung.R;
 import com.terjarung.rpc.Server;
@@ -88,6 +89,19 @@ public class BuyActivity extends ActionBarActivity {
 				Server.getYukuLayer().payment_method_nonce(paymentMethodNonce, "" + seller.price, new Callback<String>() {
 					@Override
 					public void success(final String s, final Response response) {
+
+						Server.getYukuLayer().meetup_add(new Gson().toJson(phone), seller.user, new Callback<YukuLayer.Meetup>() {
+							@Override
+							public void success(final YukuLayer.Meetup meetup, final Response response) {
+
+							}
+
+							@Override
+							public void failure(final RetrofitError error) {
+
+							}
+						});
+
 						startActivity(new Intent(App.context, SuccessBuyActivity.class)
 							.putExtra("phone", phone));
 						setResult(RESULT_OK);

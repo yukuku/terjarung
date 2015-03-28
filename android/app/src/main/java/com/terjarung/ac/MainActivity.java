@@ -1,9 +1,11 @@
 package com.terjarung.ac;
 
+import android.animation.LayoutTransition;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +24,9 @@ import retrofit.client.Response;
 import yuku.afw.V;
 import yuku.afw.storage.Preferences;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -31,6 +36,10 @@ public class MainActivity extends ActionBarActivity {
 	View bBuy;
 
 	LinearLayout panelMeetups;
+	AtomicBoolean reloading = new AtomicBoolean();
+
+	Set<YukuLayer.Meetup> shown = new LinkedHashSet<>();
+	Set<YukuLayer.Meetup> poppedup = new LinkedHashSet<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,25 +57,67 @@ public class MainActivity extends ActionBarActivity {
 		});
 
 		panelMeetups = V.get(this, R.id.panelMeetups);
-		reload();
+
+		reloader.post(new Runnable() {
+			@Override
+			public void run() {
+				reload();
+				if (isFinishing()) return;
+				reloader.postDelayed(this, 2000);
+			}
+		});
 	}
 
+	Handler reloader = new Handler();
+
 	void reload() {
+		if (!reloading.compareAndSet(false, true)) {
+			return;
+		}
+
 		Server.getYukuLayer().my_meetups(new Callback<YukuLayer.Meetup[]>() {
 			@Override
 			public void success(final YukuLayer.Meetup[] meetups, final Response response) {
+				reloading.set(false);
+
 				runOnUiThread(() -> {
+					boolean same = panelMeetups.getChildCount() == meetups.length;
+
+					if (same) {
+						panelMeetups.setLayoutTransition(null);
+					} else {
+						panelMeetups.setLayoutTransition(new LayoutTransition());
+					}
+
+					Set<YukuLayer.Meetup> now = new LinkedHashSet<>();
+					now.addAll(Arrays.asList(meetups));
+					for (final YukuLayer.Meetup sm : shown) {
+						if (!now.contains(sm) && !poppedup.contains(sm)) {
+							poppedup.add(sm);
+							if (sm.youare == 1) {
+								new AlertDialog.Builder(MainActivity.this)
+									.setMessage("You've got a payment for " + sm.phone.name + ".\n\nCheck your PayPal account " + sm.your_email + " for more details!")
+									.setPositiveButton("Cool!", null)
+									.show();
+							}
+						}
+					}
+
 					panelMeetups.removeAllViews();
 
 					for (final YukuLayer.Meetup meetup : meetups) {
+						shown.add(meetup);
+
 						final View v = getLayoutInflater().inflate(R.layout.item_meetup, panelMeetups, false);
 
 						TextView tPhone = V.get(v, R.id.tPhone);
 						TextView tContacts = V.get(v, R.id.tContacts);
 						Button bDelivered = V.get(v, R.id.bDelivered);
+						View imgTick = V.get(v, R.id.imgTick);
 
-						tPhone.setText(meetup.phone.name);
+						tPhone.setText(meetup.phone.name + (meetup.youare == 1 ? " sold to:" : " sold by:"));
 						tContacts.setText(meetup.contacts);
+						imgTick.setVisibility((meetup.status & meetup.youare) != 0 ? View.VISIBLE : View.INVISIBLE);
 						bDelivered.setOnClickListener(v2 -> {
 							AtomicBoolean cancelled = new AtomicBoolean();
 
@@ -100,6 +151,7 @@ public class MainActivity extends ActionBarActivity {
 
 			@Override
 			public void failure(final RetrofitError error) {
+				reloading.set(false);
 				new AlertDialog.Builder(MainActivity.this)
 					.setMessage(error.getMessage())
 					.setPositiveButton("OK", null)

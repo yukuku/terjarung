@@ -137,6 +137,7 @@ public interface YukuLayer {
 			public void writeToParcel(Parcel dest, int flags) {
 				dest.writeString(this.area);
 				dest.writeInt(this.price);
+				dest.writeString(this.user);
 			}
 
 			public Seller() {
@@ -145,9 +146,10 @@ public interface YukuLayer {
 			private Seller(Parcel in) {
 				this.area = in.readString();
 				this.price = in.readInt();
+				this.user = in.readString();
 			}
 
-			public static final Parcelable.Creator<Seller> CREATOR = new Parcelable.Creator<Seller>() {
+			public static final Creator<Seller> CREATOR = new Creator<Seller>() {
 				public Seller createFromParcel(Parcel source) {
 					return new Seller(source);
 				}
@@ -186,6 +188,25 @@ public interface YukuLayer {
 		public Phone phone;
 		public String contacts;
 		public int youare;
+		public int status;
+		public String your_email;
+
+		@Override
+		public boolean equals(final Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+
+			final Meetup meetup = (Meetup) o;
+
+			if (id != meetup.id) return false;
+
+			return true;
+		}
+
+		@Override
+		public int hashCode() {
+			return (int) (id ^ (id >>> 32));
+		}
 	}
 
 	@POST("/my_meetups")
@@ -193,4 +214,7 @@ public interface YukuLayer {
 
 	@POST("/meetup_update_status")
 	void meetup_update_status(@Query("meetup_id") long meetup_id, @Query("youare") int youare, Callback<Boolean> result);
+
+	@POST("/meetup_add")
+	void meetup_add(@Query("phone") String phone, @Query("seller_user") String seller_user, Callback<Meetup> result);
 }

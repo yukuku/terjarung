@@ -177,21 +177,19 @@ class MyOfferAddHandler(ApiHandler):
 
 class MyMeetupsHandler(ApiHandler):
     def handle(self):
-        p = phone_data.phones[1]
-
+        ddd = 'Default Moeljadi, +65 9390 1772, davidmoeljadi@gmail.com'
         return [
             {
-                'id': 1,
-                'buyer_user': 'buyer1',
-                'seller_user': 'seller1',
-                'phone': {
-                    'id': p[0],
-                    'name': p[1],
-                    'img': p[2],
-                },
-                'contacts': 'David Moeljadi, +65 9390 1772, davidmoeljadi@gmail.com',
-                'youare': 1 if self.user == 'seller1' else 2
+                'id': m.key.id(),
+                'buyer_user': m.buyer_user,
+                'seller_user': m.seller_user,
+                'phone': json.loads(m.phone),
+                'contacts': phone_data.contacts.get(m.buyer_user, ddd) if self.user == m.seller_user else phone_data.contacts.get(m.seller_user, ddd),
+                'your_email': (phone_data.contacts.get(m.seller_user, ddd) if self.user == m.seller_user else phone_data.contacts.get(m.buyer_user, ddd)).split(',')[2].strip(),
+                'youare': 1 if self.user == m.seller_user else 2,
+                'status': m.status,
             }
+            for m in list(Meetup.query().filter(Meetup.buyer_user == self.user)) + list(Meetup.query().filter(Meetup.seller_user == self.user)) if m.status != 3
         ]
 
 
@@ -210,6 +208,19 @@ class MeetupUpdateStatusHandler(ApiHandler):
         return True
 
 
+class MeetupAddHandler(ApiHandler):
+    def handle(self):
+        seller_user = self.request.get('seller_user')
+        phone = self.request.get('phone')
+
+        m = Meetup(seller_user = seller_user, buyer_user = self.user, status = 0, phone = phone)
+        m.put()
+
+        return {
+            'id': m.key.id(),
+        }
+
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
@@ -224,4 +235,5 @@ app = webapp2.WSGIApplication([
     ('/sellers/?', SellersHandler),
     ('/my_meetups/?', MyMeetupsHandler),
     ('/meetup_update_status/?', MeetupUpdateStatusHandler),
+    ('/meetup_add/?', MeetupAddHandler),
 ], debug=True)

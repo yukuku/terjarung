@@ -45,3 +45,14 @@ pp = [      # plans
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
+contacts = {
+    'seller1': 'David Moeljadi, +65 9390 1772, davidmoeljadi@gmail.com',
+    'seller2': 'Jaya Hendrik, +65 1234 5678, jayajaya@gmail.com',
+    'seller3': 'Kenny Lim, +65 9876 5432, limkenny@gmail.com',
+    'seller4': 'Alvin Tan, +65 4050 6070, alvintan@gmail.com',
+    'buyer1': 'Wahidah, +65 5555 7788, wahidah@gmail.com',
+    'buyer2': 'Kestoori, +65 9806 3456, toori@gmail.com',
+    'buyer3': 'Mohammad Helmy, +65 4628 9034, Helmi@gmail.com',
+    'buyer4': 'Juliana, +65 8945 4235, julijuli@gmail.com',
+}
+
