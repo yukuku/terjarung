@@ -3,8 +3,8 @@ import logging
 import sys
 import warnings
 
-from stdlib_socket import error as SocketError, timeout as SocketTimeout
-import stdlib_socket
+from socket import error as SocketError, timeout as SocketTimeout
+import socket
 
 try:  # Python 3
     from queue import LifoQueue, Empty, Full
@@ -362,7 +362,7 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
                 raise ReadTimeoutError(
                     self, url, "Read timed out. (read timeout=%s)" % read_timeout)
             if read_timeout is Timeout.DEFAULT_TIMEOUT:
-                conn.sock.settimeout(stdlib_socket.getdefaulttimeout())
+                conn.sock.settimeout(socket.getdefaulttimeout())
             else:  # None or a value
                 conn.sock.settimeout(read_timeout)
 

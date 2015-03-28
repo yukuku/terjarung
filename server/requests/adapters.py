@@ -8,7 +8,7 @@ This module contains the transport adapters that Requests uses to define
 and maintain connections.
 """
 
-import stdlib_socket
+import socket
 
 from .models import Response
 from .packages.urllib3.poolmanager import PoolManager, proxy_from_url
@@ -411,7 +411,7 @@ class HTTPAdapter(BaseAdapter):
                     # All is well, return the connection to the pool.
                     conn._put_conn(low_conn)
 
-        except (ProtocolError, stdlib_socket.error) as err:
+        except (ProtocolError, socket.error) as err:
             raise ConnectionError(err, request=request)
 
         except MaxRetryError as e:

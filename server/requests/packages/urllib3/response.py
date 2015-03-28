@@ -1,6 +1,6 @@
 import zlib
 import io
-from stdlib_socket import timeout as SocketTimeout
+from socket import timeout as SocketTimeout
 
 from ._collections import HTTPHeaderDict
 from .exceptions import ProtocolError, DecodeError, ReadTimeoutError

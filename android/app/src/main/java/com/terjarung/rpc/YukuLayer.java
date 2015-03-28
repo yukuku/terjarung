@@ -44,4 +44,17 @@ public interface YukuLayer {
 
 	@POST("/phones_to_sell")
 	void phones_to_sell(Callback<PhoneToSell[]> result);
+
+	public static class SellersResult {
+		public Phone phone;
+		public Seller[] sellers;
+
+		public static class Seller {
+			public String area;
+			public int price;
+		}
+	}
+
+	@POST("/sellers")
+	void sellers(Callback<SellersResult> result);
 }

@@ -1,7 +1,7 @@
 import datetime
 import sys
-import stdlib_socket
-from stdlib_socket import timeout as SocketTimeout
+import socket
+from socket import timeout as SocketTimeout
 import warnings
 from .packages import six
 
@@ -91,7 +91,7 @@ class HTTPConnection(_HTTPConnection, object):
 
     #: Disable Nagle's algorithm by default.
     #: ``[(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)]``
-    default_socket_options = [(stdlib_socket.IPPROTO_TCP, stdlib_socket.TCP_NODELAY, 1)]
+    default_socket_options = [(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)]
 
     #: Whether this connection verifies the host's certificate.
     is_verified = False
@@ -160,7 +160,7 @@ class HTTPSConnection(HTTPConnection):
     default_port = port_by_scheme['https']
 
     def __init__(self, host, port=None, key_file=None, cert_file=None,
-                 strict=None, timeout=stdlib_socket._GLOBAL_DEFAULT_TIMEOUT, **kw):
+                 strict=None, timeout=socket._GLOBAL_DEFAULT_TIMEOUT, **kw):
 
         HTTPConnection.__init__(self, host, port, strict=strict,
                                 timeout=timeout, **kw)

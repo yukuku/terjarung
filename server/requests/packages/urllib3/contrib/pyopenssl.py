@@ -55,7 +55,7 @@ except SyntaxError as e:
 import OpenSSL.SSL
 from pyasn1.codec.der import decoder as der_decoder
 from pyasn1.type import univ, constraint
-from stdlib_socket import _fileobject, timeout
+from socket import _fileobject, timeout
 import ssl
 import select
 

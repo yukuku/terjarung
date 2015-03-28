@@ -1,4 +1,5 @@
 import random
+
 from base import *
 
 
@@ -66,7 +67,7 @@ class AvailablePhonesHandler(ApiHandler):
                 'id': p[0],
                 'name': p[1],
                 'img': p[2],
-                'price': random.randint(10, 99)*10,
+                'price': random.randint(10, 99) * 10,
             }
             for p in phone_data.phones
         ]
@@ -79,10 +80,35 @@ class PhonesToSellHandler(ApiHandler):
                 'id': p[0],
                 'name': p[1],
                 'img': p[2],
-                'price_old': random.randint(10, 99)*10,
+                'price_old': random.randint(10, 99) * 10,
             }
             for p in phone_data.phones
         ]
+
+
+class SellersHandler(ApiHandler):
+    def handle(self):
+        p = phone_data.phones[0]
+        areas = ['Toa Payoh', 'Bishan', 'Clementi', 'Jurong East', 'Sembawang', 'Changi', 'Tampines', 'Jurong West', 'Bukit Batok', 'Bukit Timah', 'Choa Chu Kang', 'Paya Lebar', 'Yishun', 'Kranji', 'Harborfront', 'Yio Chu Kang', 'Queenstown']
+
+        res = {
+            'phone': {
+                'id': p[0],
+                'name': p[1],
+                'img': p[2],
+            },
+            'sellers': [
+                {
+                    'area': random.choice(areas),
+                    'price': random.randint(10, 99) * 10,
+                }
+                for i in range(10)
+            ]
+        }
+
+        res['sellers'] = sorted(res['sellers'], key=lambda x: x['price'])
+
+        return res
 
 
 app = webapp2.WSGIApplication([
@@ -92,4 +118,5 @@ app = webapp2.WSGIApplication([
     ('/data/plans/?', DataPlansHandler),
     ('/available_phones/?', AvailablePhonesHandler),
     ('/phones_to_sell/?', PhonesToSellHandler),
+    ('/sellers/?', SellersHandler),
 ], debug=True)

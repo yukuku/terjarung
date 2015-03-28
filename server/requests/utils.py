@@ -17,7 +17,7 @@ import os
 import platform
 import re
 import sys
-import stdlib_socket
+import socket
 import struct
 import warnings
 
@@ -440,10 +440,10 @@ def address_in_network(ip, net):
     Example: returns True if ip = 192.168.1.1 and net = 192.168.1.0/24
              returns False if ip = 192.168.1.1 and net = 192.168.100.0/24
     """
-    ipaddr = struct.unpack('=L', stdlib_socket.inet_aton(ip))[0]
+    ipaddr = struct.unpack('=L', socket.inet_aton(ip))[0]
     netaddr, bits = net.split('/')
-    netmask = struct.unpack('=L', stdlib_socket.inet_aton(dotted_netmask(int(bits))))[0]
-    network = struct.unpack('=L', stdlib_socket.inet_aton(netaddr))[0] & netmask
+    netmask = struct.unpack('=L', socket.inet_aton(dotted_netmask(int(bits))))[0]
+    network = struct.unpack('=L', socket.inet_aton(netaddr))[0] & netmask
     return (ipaddr & netmask) == (network & netmask)
 
 
@@ -453,13 +453,13 @@ def dotted_netmask(mask):
     Example: if mask is 24 function returns 255.255.255.0
     """
     bits = 0xffffffff ^ (1 << 32 - mask) - 1
-    return stdlib_socket.inet_ntoa(struct.pack('>I', bits))
+    return socket.inet_ntoa(struct.pack('>I', bits))
 
 
 def is_ipv4_address(string_ip):
     try:
-        stdlib_socket.inet_aton(string_ip)
-    except stdlib_socket.error:
+        socket.inet_aton(string_ip)
+    except socket.error:
         return False
     return True
 
@@ -476,8 +476,8 @@ def is_valid_cidr(string_network):
             return False
 
         try:
-            stdlib_socket.inet_aton(string_network.split('/')[0])
-        except stdlib_socket.error:
+            socket.inet_aton(string_network.split('/')[0])
+        except socket.error:
             return False
     else:
         return False
@@ -521,7 +521,7 @@ def should_bypass_proxies(url):
     # legitimate problems.
     try:
         bypass = proxy_bypass(netloc)
-    except (TypeError, stdlib_socket.gaierror):
+    except (TypeError, socket.gaierror):
         bypass = False
 
     if bypass:

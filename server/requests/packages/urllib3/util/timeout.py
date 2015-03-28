@@ -1,6 +1,6 @@
 # The default socket timeout, used by httplib to indicate that no timeout was
 # specified by the user
-from stdlib_socket import _GLOBAL_DEFAULT_TIMEOUT
+from socket import _GLOBAL_DEFAULT_TIMEOUT
 import time
 
 from ..exceptions import TimeoutStateError

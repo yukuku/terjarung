@@ -1,4 +1,4 @@
-import stdlib_socket
+import socket
 try:
     from select import poll, POLLIN
 except ImportError:  # `poll` doesn't exist on OSX and other platforms
@@ -31,7 +31,7 @@ def is_connection_dropped(conn):  # Platform-specific
 
         try:
             return select([sock], [], [], 0.0)[0]
-        except stdlib_socket.error:
+        except socket.error:
             return True
 
     # This version is better on platforms that support it.
@@ -45,7 +45,7 @@ def is_connection_dropped(conn):  # Platform-specific
 
 # This function is copied from socket.py in the Python 2.7 standard
 # library test suite. Added to its signature is only `socket_options`.
-def create_connection(address, timeout=stdlib_socket._GLOBAL_DEFAULT_TIMEOUT,
+def create_connection(address, timeout=socket._GLOBAL_DEFAULT_TIMEOUT,
                       source_address=None, socket_options=None):
     """Connect to *address* and return the socket object.
 
@@ -61,24 +61,24 @@ def create_connection(address, timeout=stdlib_socket._GLOBAL_DEFAULT_TIMEOUT,
 
     host, port = address
     err = None
-    for res in stdlib_socket.getaddrinfo(host, port, 0, stdlib_socket.SOCK_STREAM):
+    for res in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
         af, socktype, proto, canonname, sa = res
         sock = None
         try:
-            sock = stdlib_socket.socket(af, socktype, proto)
+            sock = socket.socket(af, socktype, proto)
 
             # If provided, set socket level options before connecting.
             # This is the only addition urllib3 makes to this function.
             _set_socket_options(sock, socket_options)
 
-            if timeout is not stdlib_socket._GLOBAL_DEFAULT_TIMEOUT:
+            if timeout is not socket._GLOBAL_DEFAULT_TIMEOUT:
                 sock.settimeout(timeout)
             if source_address:
                 sock.bind(source_address)
             sock.connect(sa)
             return sock
 
-        except stdlib_socket.error as _:
+        except socket.error as _:
             err = _
             if sock is not None:
                 sock.close()
@@ -87,7 +87,7 @@ def create_connection(address, timeout=stdlib_socket._GLOBAL_DEFAULT_TIMEOUT,
     if err is not None:
         raise err
     else:
-        raise stdlib_socket.error("getaddrinfo returns an empty list")
+        raise socket.error("getaddrinfo returns an empty list")
 
 
 def _set_socket_options(sock, options):
