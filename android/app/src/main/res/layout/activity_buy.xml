@@ -9,9 +9,102 @@
 	android:paddingTop="@dimen/activity_vertical_margin"
 	tools:context="com.terjarung.ac.BuyActivity">
 
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:baselineAligned="false"
+		android:layout_marginTop="8dp"
+		android:layout_marginBottom="8dp">
+
+		<TextView
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:text="1"
+			android:id="@+id/textView3"
+			android:background="@drawable/bulet"
+			android:gravity="center_vertical|center_horizontal"
+			android:textSize="20dp"
+			android:textColor="#fff" />
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:text="Tap [Proceed to Payment] below to pay the total price and get the seller&apos;s information"
+			android:id="@+id/textView14"
+			android:layout_marginLeft="16dp"
+			android:textSize="16dp" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:baselineAligned="false"
+		android:layout_marginTop="24dp"
+		android:layout_marginBottom="8dp">
+
+		<TextView
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:text="2"
+			android:id="@+id/textView31"
+			android:background="@drawable/bulet"
+			android:gravity="center_vertical|center_horizontal"
+			android:textSize="20dp"
+			android:textColor="#fff" />
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:text="Contact the seller, make an arrangement to meet up, and get the phone"
+			android:id="@+id/textView15"
+			android:layout_marginLeft="16dp"
+			android:textSize="16dp" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:baselineAligned="false"
+		android:layout_marginTop="24dp"
+		android:layout_marginBottom="8dp">
+
+		<TextView
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:text="3"
+			android:id="@+id/textView32"
+			android:background="@drawable/bulet"
+			android:gravity="center_vertical|center_horizontal"
+			android:textSize="20dp"
+			android:textColor="#fff" />
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:text="Tap [Accepted] button in the home screen to confirm the transaction"
+			android:id="@+id/textView16"
+			android:layout_marginLeft="16dp"
+			android:textSize="16dp" />
+	</LinearLayout>
+
 	<Button
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="Pay with Braintree"
-		android:id="@+id/bPay" />
+		android:text="Proceed to Payment"
+		android:id="@+id/bPay"
+		android:layout_marginTop="24dp" />
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:text="* Please contact us if the seller provides false information. The transaction will be cancelled and the money will be fully refunded."
+		android:id="@+id/textView17"
+		android:layout_marginTop="24dp" />
 </LinearLayout>

@@ -38,7 +38,9 @@ public class SellersActivity extends ActionBarActivity {
 		lsSellers = V.get(this, R.id.lsSellers);
 		lsSellers.setAdapter(adapter = new SellersAdapter());
 		lsSellers.setOnItemClickListener((parent, view, position, id) -> {
-			startActivity(new Intent(App.context, BuyActivity.class));
+			startActivity(new Intent(App.context, BuyActivity.class)
+			.putExtra("phone", phone)
+			.putExtra("seller", adapter.getItem(position)));
 		});
 
 		reload();
@@ -108,6 +110,11 @@ public class SellersActivity extends ActionBarActivity {
 				tPrice.setText("$" + sellers[position].price);
 				tArea.setText(sellers[position].area);
 			}
+		}
+
+		@Override
+		public YukuLayer.SellersResult.Seller getItem(final int position) {
+			return sellers[position - 1];
 		}
 
 		@Override

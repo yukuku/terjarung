@@ -1,38 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content"
-	android:minHeight="72dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical"
+	android:orientation="horizontal"
 	android:padding="16dp">
 
 	<LinearLayout
-		android:orientation="horizontal"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="bottom">
-
-		<ImageView
-			android:layout_width="64dp"
-			android:layout_height="wrap_content"
-			android:id="@+id/imageView5"
-			android:src="@drawable/op1"
-			android:adjustViewBounds="true" />
+		android:layout_width="72dp"
+		android:layout_height="72dp"
+		android:background="@color/accent"
+		android:gravity="center_vertical|center_horizontal"
+		android:orientation="vertical">
 
 		<TextView
+			android:id="@+id/textView18"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:text="EARN"
 			android:textAppearance="?android:attr/textAppearanceLarge"
-			android:text="Combo 6 Youth • 20 Jun 2015"
-			android:id="@+id/tPlan"
-			android:textSize="18dp"
-			android:layout_marginLeft="16dp" />
+			android:textColor="#fff"
+			android:textSize="16dp" />
 
+		<TextView
+			android:id="@+id/textView19"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="$100"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:textColor="#fff" />
 	</LinearLayout>
 
-	<TextView
-		android:layout_width="wrap_content"
+	<ImageView
+		android:id="@+id/imageView5"
+		android:layout_width="64dp"
 		android:layout_height="wrap_content"
-		android:text="You will earn $50"
-		android:id="@+id/textView13"
-		android:textColor="@color/accent"
-		android:textSize="16dp"
-		android:layout_marginTop="8dp" />
+		android:layout_marginLeft="16dp"
+		android:adjustViewBounds="true"
+		android:src="@drawable/op1" />
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_marginLeft="16dp"
+		android:orientation="vertical"
+		android:padding="8dp">
+
+		<TextView
+			android:id="@+id/tPlan"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Combo 6 Youth"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:textSize="18dp" />
+
+		<TextView
+			android:id="@+id/textView13"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:text="21 Dec 2015"
+			android:textSize="16dp" />
+	</LinearLayout>
 </LinearLayout>

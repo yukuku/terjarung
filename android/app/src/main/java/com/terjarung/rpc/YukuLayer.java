@@ -1,5 +1,7 @@
 package com.terjarung.rpc;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import retrofit.Callback;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -10,7 +12,7 @@ public interface YukuLayer {
 	void client_token(Callback<String> clientToken);
 
 	@POST("/payment-method-nonce")
-	void payment_method_nonce(@Query("nonce") String nonce, Callback<String> result);
+	void payment_method_nonce(@Query("nonce") String nonce, @Query("amount") String amount, Callback<String> result);
 
 	public static class Plan {
 		public long id;
@@ -24,11 +26,44 @@ public interface YukuLayer {
 	@POST("/data/plans")
 	void data_plans(Callback<Plan[]> result);
 
-	public static class Phone {
+	public static class Phone implements Parcelable {
 		public long id;
 		public String name;
 		public String img;
 		public int price;
+
+		@Override
+		public int describeContents() {
+			return 0;
+		}
+
+		@Override
+		public void writeToParcel(Parcel dest, int flags) {
+			dest.writeLong(this.id);
+			dest.writeString(this.name);
+			dest.writeString(this.img);
+			dest.writeInt(this.price);
+		}
+
+		public Phone() {
+		}
+
+		private Phone(Parcel in) {
+			this.id = in.readLong();
+			this.name = in.readString();
+			this.img = in.readString();
+			this.price = in.readInt();
+		}
+
+		public static final Parcelable.Creator<Phone> CREATOR = new Parcelable.Creator<Phone>() {
+			public Phone createFromParcel(Parcel source) {
+				return new Phone(source);
+			}
+
+			public Phone[] newArray(int size) {
+				return new Phone[size];
+			}
+		};
 	}
 
 	public static class PhoneToSell {
@@ -49,9 +84,39 @@ public interface YukuLayer {
 		public Phone phone;
 		public Seller[] sellers;
 
-		public static class Seller {
+		public static class Seller implements Parcelable {
+
 			public String area;
 			public int price;
+
+			@Override
+			public int describeContents() {
+				return 0;
+			}
+
+			@Override
+			public void writeToParcel(Parcel dest, int flags) {
+				dest.writeString(this.area);
+				dest.writeInt(this.price);
+			}
+
+			public Seller() {
+			}
+
+			private Seller(Parcel in) {
+				this.area = in.readString();
+				this.price = in.readInt();
+			}
+
+			public static final Parcelable.Creator<Seller> CREATOR = new Parcelable.Creator<Seller>() {
+				public Seller createFromParcel(Parcel source) {
+					return new Seller(source);
+				}
+
+				public Seller[] newArray(int size) {
+					return new Seller[size];
+				}
+			};
 		}
 	}
 

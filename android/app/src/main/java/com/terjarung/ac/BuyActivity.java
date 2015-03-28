@@ -10,6 +10,7 @@ import com.braintreepayments.api.dropin.Customization;
 import com.terjarung.App;
 import com.terjarung.R;
 import com.terjarung.rpc.Server;
+import com.terjarung.rpc.YukuLayer;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -20,6 +21,8 @@ public class BuyActivity extends ActionBarActivity {
 
 	View bPay;
 	String clientToken;
+	YukuLayer.Phone phone;
+	YukuLayer.SellersResult.Seller seller;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +31,17 @@ public class BuyActivity extends ActionBarActivity {
 
 		downloadClientToken();
 
-		// TODO
-		String phoneModel = "Samsung Galaxy 9 999 GB";
-		String sellerUsername = "sugoi146";
-		float price = 455.0f;
+		phone = getIntent().getParcelableExtra("phone");
+		seller = getIntent().getParcelableExtra("seller");
 
 		bPay = V.get(this, R.id.bPay);
 		bPay.setOnClickListener(v -> {
 			final Intent intent = new Intent(App.context, BraintreePaymentActivity.class);
 
 			final Customization customization = new Customization.CustomizationBuilder()
-				.primaryDescription(phoneModel)
-				.secondaryDescription("from " + sellerUsername)
-				.amount("$" + price)
+				.primaryDescription(phone.name)
+				.secondaryDescription("from a seller around " + seller.area)
+				.amount("$" + seller.price)
 				.build();
 
 			intent.putExtra(BraintreePaymentActivity.EXTRA_CLIENT_TOKEN, this.clientToken);
@@ -84,10 +85,13 @@ public class BuyActivity extends ActionBarActivity {
 			if (resultCode == BraintreePaymentActivity.RESULT_OK) {
 				String paymentMethodNonce = data.getStringExtra(BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE);
 
-				Server.getYukuLayer().payment_method_nonce(paymentMethodNonce, new Callback<String>() {
+				Server.getYukuLayer().payment_method_nonce(paymentMethodNonce, "" + seller.price, new Callback<String>() {
 					@Override
 					public void success(final String s, final Response response) {
-
+						startActivity(new Intent(App.context, SuccessBuyActivity.class)
+							.putExtra("phone", phone));
+						setResult(RESULT_OK);
+						finish();
 					}
 
 					@Override

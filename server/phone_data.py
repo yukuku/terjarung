@@ -1,14 +1,14 @@
 phones = [
-    (1, "SAMSUNG GALAXY Note 4 4G+ 32GB", "http://www.singtelshop.com/images/image/samsung_galaxy_note4_gold_lrg.jpg"),
-    (2, "XIAOMI REDMI 2 4G", "http://www.singtelshop.com/images/image/xiaomi-redmi2-lrg.jpg"),
-    (3, "SAMSUNG GALAXY S5 4G+", "http://www.singtelshop.com/images/image/Samsung_S5_4g+_black_lrg.jpg"),
-    (4, "SONY XPERIA Z3", "http://www.singtelshop.com/images/image/Xperia_Z3_black_lrg.jpg"),
-    (5, "SONY XPERIA Z3 COMPACT", "http://www.singtelshop.com/images/image/Xperia_Z3_compact_black_lrg.jpg"),
-    (6, "LG G3 LTE 32GB", "http://www.singtelshop.com/images/image/LG_G3_Black_lrg.jpg"),
-    (7, "SONY Xperia C3", "http://www.singtelshop.com/images/image/Sony_Xperia_C3_Green_lrg.jpg"),
-    (8, "LG G Flex2", "http://www.singtelshop.com/images/image/lg_g_flex2_silver_lrg.jpg"),
-    (9, "SAMSUNG GALAXY A5 4G", "http://www.singtelshop.com/images/image/samsung_galaxyA5_black_lrg.jpg"),
-    (10, "ALCATEL ONETOUCH POP S3", "http://www.singtelshop.com/images/image/alcatel_pop_s3_black_lrg.jpg"),
+    (1, "SAMSUNG GALAXY Note 4 4G+ 32GB", "http://terjarung.appspot.com/img/samsung_galaxy_note4_gold_lrg.jpg"),
+    (2, "XIAOMI REDMI 2 4G", "http://terjarung.appspot.com/img/xiaomi-redmi2-lrg.jpg"),
+    (3, "SAMSUNG GALAXY S5 4G+", "http://terjarung.appspot.com/img/Samsung_S5_4g+_black_lrg.jpg"),
+    (4, "SONY XPERIA Z3", "http://terjarung.appspot.com/img/Xperia_Z3_black_lrg.jpg"),
+    (5, "SONY XPERIA Z3 COMPACT", "http://terjarung.appspot.com/img/Xperia_Z3_compact_black_lrg.jpg"),
+    (6, "LG G3 LTE 32GB", "http://terjarung.appspot.com/img/LG_G3_Black_lrg.jpg"),
+    (7, "SONY Xperia C3", "http://terjarung.appspot.com/img/Sony_Xperia_C3_Green_lrg.jpg"),
+    (8, "LG G Flex2", "http://terjarung.appspot.com/img/lg_g_flex2_silver_lrg.jpg"),
+    (9, "SAMSUNG GALAXY A5 4G", "http://terjarung.appspot.com/img/samsung_galaxyA5_black_lrg.jpg"),
+    (10, "ALCATEL ONETOUCH POP S3", "http://terjarung.appspot.com/img/alcatel_pop_s3_black_lrg.jpg"),
 ]
 
 plans = [

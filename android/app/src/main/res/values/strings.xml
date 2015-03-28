@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">terjarung</string>
+	<string name="app_name">MobTrader</string>
 
 	<string name="hello_world">Hello world!</string>
 	<string name="action_settings">Settings</string>
@@ -8,4 +8,5 @@
 	<string name="title_activity_commision">CommisionActivity</string>
 	<string name="title_activity_buy">BuyActivity</string>
 	<string name="title_activity_sellers">SellersActivity</string>
+	<string name="title_activity_success_buy">SuccessBuyActivity</string>
 </resources>

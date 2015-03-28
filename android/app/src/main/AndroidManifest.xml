@@ -27,11 +27,11 @@
         <activity
             android:name=".ac.AddPlanActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="Add new plan" />
+            android:label="Add New Plan" />
         <activity
             android:name=".ac.PhonesActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_phones" >
+            android:label="Choose Your Phone" >
         </activity>
         <activity
             android:name=".ac.CommisionActivity"
@@ -40,11 +40,15 @@
         </activity>
         <activity
             android:name=".ac.BuyActivity"
-            android:label="@string/title_activity_buy" >
+            android:label="One Step Away" >
         </activity>
         <activity
             android:name=".ac.SellersActivity"
-            android:label="@string/title_activity_sellers" >
+            android:label="Seller Listing" >
+        </activity>
+        <activity
+            android:name=".ac.SuccessBuyActivity"
+            android:label="@string/title_activity_success_buy" >
         </activity>
     </application>
 

@@ -38,8 +38,9 @@ class ClientTokenHandler(ApiHandler):
 class PaymentMethodNonceHandler(ApiHandler):
     def handle(self):
         nonce = self.request.get('nonce')
+        amount = self.request.get('amount')
         result = braintree.Transaction.sale({
-            "amount": "10.00",
+            "amount": amount,
             "payment_method_nonce": nonce,
         })
         info(result)
