@@ -29,6 +29,8 @@ public class SellersActivity extends ActionBarActivity {
 	YukuLayer.Phone phone;
 
 	long seed = new Random().nextLong();
+	ImageView imgPhone;
+	TextView tName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +41,17 @@ public class SellersActivity extends ActionBarActivity {
 		lsSellers.setAdapter(adapter = new SellersAdapter());
 		lsSellers.setOnItemClickListener((parent, view, position, id) -> {
 			startActivity(new Intent(App.context, BuyActivity.class)
-			.putExtra("phone", phone)
-			.putExtra("seller", adapter.getItem(position)));
+				.putExtra("phone", phone)
+				.putExtra("seller", adapter.getItem(position)));
 		});
+
+		imgPhone = V.get(this, R.id.imgPhone);
+		tName = V.get(this, R.id.tName);
+
+		phone = getIntent().getParcelableExtra("phone");
+		final YukuLayer.Phone p = phone;
+		Glide.with(SellersActivity.this).load(p.img).into(imgPhone);
+		tName.setText(p.name);
 
 		reload();
 	}
@@ -51,7 +61,7 @@ public class SellersActivity extends ActionBarActivity {
 			@Override
 			public void success(final YukuLayer.SellersResult sellersResult, final Response response) {
 				sellers = sellersResult.sellers;
-				phone = sellersResult.phone;
+
 				adapter.notifyDataSetChanged();
 			}
 
@@ -79,57 +89,30 @@ public class SellersActivity extends ActionBarActivity {
 
 		@Override
 		public View newView(final int position, final ViewGroup parent) {
-			final int type = getItemViewType(position);
-			return getLayoutInflater().inflate(type == 0 ? R.layout.item_seller_heading : R.layout.item_seller, parent, false);
+			return getLayoutInflater().inflate(R.layout.item_seller, parent, false);
 		}
 
 		@Override
-		public int getItemViewType(final int position) {
-			if (position == 0) return 0;
-			return 1;
-		}
+		public void bindView(final View view, int position, final ViewGroup parent) {
 
-		@Override
-		public void bindView(final View view,  int position, final ViewGroup parent) {
-			final int type = getItemViewType(position);
+			ImageView imgAvatar = V.get(view, R.id.imgAvatar);
+			TextView tPrice = V.get(view, R.id.tPrice);
+			TextView tArea = V.get(view, R.id.tArea);
 
-			if (type == 0) {
-				ImageView imgPhone = V.get(view, R.id.imgPhone);
-				TextView tName = V.get(view, R.id.tName);
-
-				final YukuLayer.Phone p = phone;
-				Glide.with(SellersActivity.this).load(p.img).into(imgPhone);
-				tName.setText(p.name);
-			} else {
-				ImageView imgAvatar = V.get(view, R.id.imgAvatar);
-				TextView tPrice = V.get(view, R.id.tPrice);
-				TextView tArea = V.get(view, R.id.tArea);
-
-				position = position -1;
-				imgAvatar.setImageResource(pps[new Random(seed + position).nextInt(pps.length)]);
-				tPrice.setText("$" + sellers[position].price);
-				tArea.setText(sellers[position].area);
-			}
+			imgAvatar.setImageResource(pps[new Random(seed + position).nextInt(pps.length)]);
+			tPrice.setText("$" + sellers[position].price);
+			tArea.setText(sellers[position].area);
 		}
 
 		@Override
 		public YukuLayer.SellersResult.Seller getItem(final int position) {
-			return sellers[position - 1];
+			return sellers[position];
 		}
 
 		@Override
 		public int getCount() {
-			return sellers == null ? 0 : sellers.length + 1;
+			return sellers == null ? 0 : sellers.length;
 		}
 
-		@Override
-		public int getViewTypeCount() {
-			return 2;
-		}
-
-		@Override
-		public boolean isEnabled(final int position) {
-			return getItemViewType(position) == 1;
-		}
 	}
 }

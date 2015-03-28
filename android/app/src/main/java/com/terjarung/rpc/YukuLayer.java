@@ -161,4 +161,21 @@ public interface YukuLayer {
 	@POST("/sellers")
 	void sellers(Callback<SellersResult> result);
 
+	@POST("/my_offer_add")
+	void my_offer_add(@Query("plan") String plan, @Query("op") int op, @Query("exp") String exp, @Query("profit") int profit, Callback<SellersResult> result);
+
+	@POST("/my_offer_delete")
+	void my_offer_delete(@Query("offer_id") long offer_id, Callback<Boolean> result);
+
+	public static class Offer {
+		public long id;
+		public String exp;
+		public int op;
+		public Plan plan;
+		public int profit;
+	}
+
+	@POST("/my_offers")
+	void my_offers(Callback<Offer[]> result);
+
 }

@@ -1,7 +1,7 @@
 import random
 
 from base import *
-
+from db import *
 
 if IS_DEVELOPMENT_SERVER:
     from google.appengine.tools.devappserver2.python import sandbox
@@ -122,11 +122,55 @@ class SellersHandler(ApiHandler):
         return res
 
 
+class MyOffersHandler(ApiHandler):
+    def handle(self):
+        res = []
+        for o in Offer.query().filter(Offer.user == self.user):
+            res.append({
+                'id': o.key.id(),
+                'exp': o.exp,
+                'op': o.op,
+                'plan': json.loads(o.plan),
+                'profit': o.profit,
+            })
+
+        return res
+
+
+class MyOfferDeleteHandler(ApiHandler):
+    def handle(self):
+        offer_id = self.request.get('offer_id')
+        o = Offer.get_by_id(int(offer_id))
+        if o:
+            o.key.delete()
+
+        return True
+
+
+class MyOfferAddHandler(ApiHandler):
+    def handle(self):
+        plan = self.request.get('plan')
+        exp = self.request.get('exp')
+        op = int(self.request.get('op'))
+        profit = int(self.request.get('profit'))
+
+        o = Offer(user=self.user, plan=plan, exp =exp, op=op, profit=profit)
+        o.put()
+
+        return {
+            'success': True,
+            'id': o.key.id(),
+        }
+
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/client_token/?', ClientTokenHandler),
     ('/payment-method-nonce/?', PaymentMethodNonceHandler),
     ('/data/plans/?', DataPlansHandler),
+    ('/my_offers/?', MyOffersHandler),
+    ('/my_offer_delete/?', MyOfferDeleteHandler),
+    ('/my_offer_add/?', MyOfferAddHandler),
     ('/available_phones/?', AvailablePhonesHandler),
     ('/phones_to_sell/?', PhonesToSellHandler),
     ('/sellers/?', SellersHandler),

@@ -1,3 +1,21 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-	<item android:id="@+id/action_settings" android:title="@string/action_settings" android:orderInCategory="100" app:showAsAction="never" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:context=".MainActivity">
+	<item
+		android:id="@+id/menuLoginSeller"
+		android:title="Login as Seller"
+		app:showAsAction="never" />
+	<item
+		android:id="@+id/menuLoginSeller2"
+		android:title="Login as Seller 2"
+		app:showAsAction="never" />
+	<item
+		android:id="@+id/menuLoginBuyer"
+		android:title="Login as Buyer"
+		app:showAsAction="never" />
+	<item
+		android:id="@+id/menuLoginBuyer2"
+		android:title="Login as Buyer 2"
+		app:showAsAction="never" />
 </menu>
