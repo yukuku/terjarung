@@ -32,7 +32,7 @@
 		<activity
 			android:name=".ac.PhonesActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"
-			android:label="Choose Your Phone" />
+			android:label="Phone You Want to Buy" />
 		<activity
 			android:name=".ac.CommisionActivity"
 			android:configChanges="keyboardHidden|orientation|screenSize"
