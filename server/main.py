@@ -72,10 +72,25 @@ class AvailablePhonesHandler(ApiHandler):
         ]
 
 
+class PhonesToSellHandler(ApiHandler):
+    def handle(self):
+        return [
+            {
+                'id': p[0],
+                'name': p[1],
+                'img': p[2],
+                'price_old': random.randint(100, 999),
+                'price_new': random.randint(100, 999),
+            }
+            for p in phone_data.phones
+        ]
+
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/client_token/?', ClientTokenHandler),
     ('/payment-method-nonce/?', PaymentMethodNonceHandler),
     ('/data/plans/?', DataPlansHandler),
     ('/available_phones/?', AvailablePhonesHandler),
+    ('/phones_to_sell/?', PhonesToSellHandler),
 ], debug=True)

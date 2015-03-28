@@ -31,6 +31,17 @@ public interface YukuLayer {
 		public int price;
 	}
 
+	public static class PhoneToSell {
+		public long id;
+		public String name;
+		public String img;
+		public int price_old;
+		public int price_new;
+	}
+
 	@POST("/available_phones")
 	void available_phones(Callback<Phone[]> result);
+
+	@POST("/phones_to_sell")
+	void phones_to_sell(Callback<PhoneToSell[]> result);
 }

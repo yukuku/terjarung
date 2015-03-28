@@ -40,9 +40,9 @@
 				android:text="$999"
 				android:id="@+id/tPrice"
 				android:textColor="@color/accent"
-				android:textStyle="bold"
 				android:textSize="40dp"
-				android:layout_marginLeft="16dp" />
+				android:layout_marginLeft="16dp"
+				android:fontFamily="sans-serif-medium" />
 		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>
