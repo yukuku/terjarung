@@ -2,12 +2,16 @@ package com.terjarung.ac;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.format.DateFormat;
@@ -127,6 +131,7 @@ public class AddPlanActivity extends ActionBarActivity {
 
 	public void setOp(final int op) {
 		this.op = op;
+		LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent("opchange").putExtra("op", op));
 	}
 
 	public void setDatePicker(final DatePicker datePicker) {
@@ -135,6 +140,10 @@ public class AddPlanActivity extends ActionBarActivity {
 
 	public DatePicker getDatePicker() {
 		return datePicker;
+	}
+
+	public int getOp() {
+		return op;
 	}
 
 	class TutorialAdapter extends FragmentStatePagerAdapter {
@@ -223,7 +232,23 @@ public class AddPlanActivity extends ActionBarActivity {
 		@Override
 		public void onCreate(final Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
+			LocalBroadcastManager.getInstance(App.context)
+				.registerReceiver(br, new IntentFilter("opchange"));
 		}
+
+		@Override
+		public void onDestroy() {
+			super.onDestroy();
+			LocalBroadcastManager.getInstance(App.context)
+				.unregisterReceiver(br);
+		}
+
+		BroadcastReceiver br = new BroadcastReceiver() {
+			@Override
+			public void onReceive(final Context context, final Intent intent) {
+				comboPlanOp(intent.getIntExtra("op", 0));
+			}
+		};
 
 		@Override
 		public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -238,8 +263,33 @@ public class AddPlanActivity extends ActionBarActivity {
 
 			cbPlans = V.get(view, R.id.cbPlans);
 
-			Server.getYukuLayer().data_plans(new Callback<YukuLayer.Plan[]>() {
+			int op = activity.getOp();
+			if (op != 0) {
+				comboPlanOp(op);
+			}
 
+			TextView tPlanDetails = V.get(view, R.id.tPlanDetails);
+
+			cbPlans.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				@Override
+				public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
+					final YukuLayer.Plan p = plans[position];
+					tPlanDetails.setText(String.format("$%s / month\n%s mins outgoing calls\n%s local SMS/MMS\n%s local data", p.monthly, p.call, p.sms, p.quota));
+					activity.setPlan(p);
+				}
+
+				@Override
+				public void onNothingSelected(final AdapterView<?> parent) {
+					tPlanDetails.setText("");
+				}
+			});
+
+			datePicker = V.get(view, R.id.datePicker);
+			activity.setDatePicker(datePicker);
+		}
+
+		private void comboPlanOp(final int op) {
+			Server.getYukuLayer().data_plans(op, new Callback<YukuLayer.Plan[]>() {
 				@Override
 				public void success(final YukuLayer.Plan[] plans, final Response response) {
 					Page2Fragment.this.plans = plans;
@@ -273,25 +323,6 @@ public class AddPlanActivity extends ActionBarActivity {
 
 				}
 			});
-
-			TextView tPlanDetails = V.get(view, R.id.tPlanDetails);
-
-			cbPlans.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-				@Override
-				public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
-					final YukuLayer.Plan p = plans[position];
-					tPlanDetails.setText(String.format("$%s / month\n%s mins outgoing calls\n%s local SMS/MMS\n%s local data", p.monthly, p.call, p.sms, p.quota));
-					activity.setPlan(p);
-				}
-
-				@Override
-				public void onNothingSelected(final AdapterView<?> parent) {
-					tPlanDetails.setText("");
-				}
-			});
-
-			datePicker = V.get(view, R.id.datePicker);
-			activity.setDatePicker(datePicker);
 		}
 	}
 }

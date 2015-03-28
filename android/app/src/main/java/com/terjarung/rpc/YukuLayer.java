@@ -62,7 +62,7 @@ public interface YukuLayer {
 	}
 
 	@POST("/data/plans")
-	void data_plans(Callback<Plan[]> result);
+	void data_plans(@Query("op") int op, Callback<Plan[]> result);
 
 	public static class Phone implements Parcelable {
 		public long id;
