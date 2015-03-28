@@ -23,6 +23,12 @@ plans = [
     (9, "Combo 3 Youth", "300", "1200", "56.61", "4 GB"),
     (10, "Combo 4 Youth", "400", "1300", "82.9", "4 GB"),
     (11, "Combo 6 Youth", "700", "1500", "102.9", "6 GB"),
+    (12, "SmartSurf HD Value", "600", "UNLIMITED", "68", "500 MB"),
+    (13, "SmartSurf HD Plus", "UNLIMITED", "UNLIMITED", "88", "1 GB"),
+    (14, "SmartSurf HD Premium", "UNLIMITED", "UNLIMITED", "108", "1.5 GB"),
+    (15, "Lite", "100", "500", "28", "300 MB"),
+    (16, "Lite+", "200", "1000", "41", "3 GB"),
+    (17, "Reg", "300", "1200", "61", "4 GB"),
 ]
 
 pp = [      # plans
@@ -38,4 +44,3 @@ pp = [      # plans
     [398, 298, 0, 0, 0, 0, 398, 298, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
-
