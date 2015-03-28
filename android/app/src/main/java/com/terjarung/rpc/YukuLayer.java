@@ -65,7 +65,7 @@ public interface YukuLayer {
 	void data_plans(@Query("op") int op, Callback<Plan[]> result);
 
 	public static class Phone implements Parcelable {
-		public long id;
+		public int id;
 		public String name;
 		public String img;
 		public int price;
@@ -77,7 +77,7 @@ public interface YukuLayer {
 
 		@Override
 		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeLong(this.id);
+			dest.writeInt(this.id);
 			dest.writeString(this.name);
 			dest.writeString(this.img);
 			dest.writeInt(this.price);
@@ -87,7 +87,7 @@ public interface YukuLayer {
 		}
 
 		private Phone(Parcel in) {
-			this.id = in.readLong();
+			this.id = in.readInt();
 			this.name = in.readString();
 			this.img = in.readString();
 			this.price = in.readInt();
@@ -126,6 +126,7 @@ public interface YukuLayer {
 
 			public String area;
 			public int price;
+			public String user;
 
 			@Override
 			public int describeContents() {
@@ -159,7 +160,7 @@ public interface YukuLayer {
 	}
 
 	@POST("/sellers")
-	void sellers(Callback<SellersResult> result);
+	void sellers(@Query("phone_id") int phone_id, Callback<SellersResult> result);
 
 	@POST("/my_offer_add")
 	void my_offer_add(@Query("plan") String plan, @Query("op") int op, @Query("exp") String exp, @Query("profit") int profit, Callback<SellersResult> result);

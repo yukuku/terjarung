@@ -99,21 +99,21 @@ class PhonesToSellHandler(ApiHandler):
 
 class SellersHandler(ApiHandler):
     def handle(self):
-        p = phone_data.phones[0]
+        phone_id = int(self.request.get('phone_id'))
+        base_prices = phone_data.pp[phone_id-1]
+
         areas = ['Toa Payoh', 'Bishan', 'Clementi', 'Jurong East', 'Sembawang', 'Changi', 'Tampines', 'Jurong West', 'Bukit Batok', 'Bukit Timah', 'Choa Chu Kang', 'Paya Lebar', 'Yishun', 'Kranji', 'Harborfront', 'Yio Chu Kang', 'Queenstown']
 
+        random.seed(phone_id)
+
         res = {
-            'phone': {
-                'id': p[0],
-                'name': p[1],
-                'img': p[2],
-            },
             'sellers': [
                 {
                     'area': random.choice(areas),
-                    'price': random.randint(10, 99) * 10,
+                    'price': base_prices[json.loads(o.plan)['id']-1] + o.profit,
+                    'user': o.user,
                 }
-                for i in range(10)
+                for o in Offer.query()
             ]
         }
 

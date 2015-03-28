@@ -208,6 +208,7 @@ public class AddPlanActivity extends ActionBarActivity {
 				panelOperator3.setBackgroundColor(0x0);
 				v.setBackgroundColor(0x20000000);
 				activity.setOp(v == panelOperator1 ? 1 : v == panelOperator2 ? 2 : 3);
+				activity.viewPager.setCurrentItem(1, true);
 			};
 
 			panelOperator1.setOnClickListener(vo);

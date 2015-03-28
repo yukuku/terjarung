@@ -57,7 +57,7 @@ public class SellersActivity extends ActionBarActivity {
 	}
 
 	void reload() {
-		Server.getYukuLayer().sellers(new Callback<YukuLayer.SellersResult>() {
+		Server.getYukuLayer().sellers(phone.id, new Callback<YukuLayer.SellersResult>() {
 			@Override
 			public void success(final YukuLayer.SellersResult sellersResult, final Response response) {
 				sellers = sellersResult.sellers;
@@ -99,7 +99,7 @@ public class SellersActivity extends ActionBarActivity {
 			TextView tPrice = V.get(view, R.id.tPrice);
 			TextView tArea = V.get(view, R.id.tArea);
 
-			imgAvatar.setImageResource(pps[new Random(seed + position).nextInt(pps.length)]);
+			imgAvatar.setImageResource(pps[new Random(sellers[position].user.hashCode()).nextInt(pps.length)]);
 			tPrice.setText("$" + sellers[position].price);
 			tArea.setText(sellers[position].area);
 		}
