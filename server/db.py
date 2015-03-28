@@ -7,3 +7,12 @@ class Offer(ndb.Model):
     exp = ndb.TextProperty()
     op = ndb.IntegerProperty()
     profit = ndb.IntegerProperty()
+
+
+class Meetup(ndb.Model):
+    seller_user = ndb.StringProperty()
+    buyer_user = ndb.StringProperty()
+    status = ndb.IntegerProperty()
+    phone = ndb.TextProperty()
+
+

@@ -175,6 +175,42 @@ class MyOfferAddHandler(ApiHandler):
         }
 
 
+class MyMeetupsHandler(ApiHandler):
+    def handle(self):
+        p = phone_data.phones[1]
+
+        return [
+            {
+                'id': 1,
+                'buyer_user': 'buyer1',
+                'seller_user': 'seller1',
+                'phone': {
+                    'id': p[0],
+                    'name': p[1],
+                    'img': p[2],
+                },
+                'contacts': 'David Moeljadi, +65 9390 1772, davidmoeljadi@gmail.com',
+                'youare': 1 if self.user == 'seller1' else 2
+            }
+        ]
+
+
+class MeetupUpdateStatusHandler(ApiHandler):
+    def handle(self):
+        meetup_id = int(self.request.get('meetup_id'))
+        youare = int(self.request.get('youare'))
+
+        m = Meetup.get_by_id(meetup_id)
+        if not m:
+            return False
+
+        m.status |= youare
+        m.put()
+
+        return True
+
+
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/client_token/?', ClientTokenHandler),
@@ -186,4 +222,6 @@ app = webapp2.WSGIApplication([
     ('/available_phones/?', AvailablePhonesHandler),
     ('/phones_to_sell/?', PhonesToSellHandler),
     ('/sellers/?', SellersHandler),
+    ('/my_meetups/?', MyMeetupsHandler),
+    ('/meetup_update_status/?', MeetupUpdateStatusHandler),
 ], debug=True)

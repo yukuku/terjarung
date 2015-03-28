@@ -179,4 +179,18 @@ public interface YukuLayer {
 	@POST("/my_offers")
 	void my_offers(Callback<Offer[]> result);
 
+	public static class Meetup {
+		public long id;
+		public String buyer_user;
+		public String seller_user;
+		public Phone phone;
+		public String contacts;
+		public int youare;
+	}
+
+	@POST("/my_meetups")
+	void my_meetups(Callback<Meetup[]> result);
+
+	@POST("/meetup_update_status")
+	void meetup_update_status(@Query("meetup_id") long meetup_id, @Query("youare") int youare, Callback<Boolean> result);
 }
