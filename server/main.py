@@ -48,6 +48,16 @@ class PaymentMethodNonceHandler(ApiHandler):
 
 class DataPlansHandler(ApiHandler):
     def handle(self):
+        op = self.request.get('op')
+        op = int(op)
+
+        if op == 1:
+            plans = phone_data.plans[0:11]
+        elif op == 2:
+            plans = phone_data.plans[11:14]
+        else:
+            plans = phone_data.plans[14:]
+
         return [
             {
                 'id': plan[0],
@@ -57,7 +67,7 @@ class DataPlansHandler(ApiHandler):
                 'monthly': plan[4],
                 'quota': plan[5],
             }
-            for plan in phone_data.plans
+            for plan in plans
         ]
 
 
