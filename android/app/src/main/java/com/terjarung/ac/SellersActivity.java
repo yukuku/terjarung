@@ -28,7 +28,6 @@ public class SellersActivity extends ActionBarActivity {
 	YukuLayer.SellersResult.Seller[] sellers;
 	YukuLayer.Phone phone;
 
-	long seed = new Random().nextLong();
 	ImageView imgPhone;
 	TextView tName;
 
