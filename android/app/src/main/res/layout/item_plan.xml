@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content"
-	android:minHeight="72dp">
-
-	<de.hdodenhof.circleimageview.CircleImageView
-		android:layout_width="48dp"
-		android:layout_height="48dp"
-		android:id="@+id/imgAvatar"
-		android:src="#4000"
-		android:layout_marginLeft="16dp"
-		android:layout_gravity="center_vertical" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content"
+	android:minHeight="72dp"
+	android:padding="16dp">
 
 	<LinearLayout
-		android:orientation="vertical"
+		android:orientation="horizontal"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:padding="16dp">
+		android:gravity="bottom">
+
+		<ImageView
+			android:layout_width="64dp"
+			android:layout_height="wrap_content"
+			android:id="@+id/imageView5"
+			android:src="@drawable/op1"
+			android:adjustViewBounds="true" />
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceLarge"
-			android:text="$9999"
-			android:id="@+id/tPrice"
-			android:textSize="16dp" />
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:text="Wooldans"
-			android:id="@+id/tArea"
-			android:textSize="14dp" />
+			android:text="Combo 6 Youth • 20 Jun 2015"
+			android:id="@+id/tPlan"
+			android:textSize="18dp"
+			android:layout_marginLeft="16dp" />
 
 	</LinearLayout>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="You will earn $50"
+		android:id="@+id/textView13"
+		android:textColor="@color/accent"
+		android:textSize="16dp"
+		android:layout_marginTop="8dp" />
 </LinearLayout>

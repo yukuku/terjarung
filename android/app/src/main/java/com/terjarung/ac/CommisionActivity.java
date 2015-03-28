@@ -1,8 +1,9 @@
 package com.terjarung.ac;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import com.terjarung.App;
 import com.terjarung.R;
 import com.terjarung.rpc.Server;
 import com.terjarung.rpc.YukuLayer;
@@ -24,8 +24,10 @@ public class CommisionActivity extends ActionBarActivity {
 	static final String TAG = CommisionActivity.class.getSimpleName();
 
 	ListView lsPhones;
+	TextView tProfit;
 	PhonesToSellAdapter adapter;
 	YukuLayer.PhoneToSell[] phones;
+	int profit = 100;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,31 @@ public class CommisionActivity extends ActionBarActivity {
 
 		lsPhones = V.get(this, R.id.lsPhones);
 		lsPhones.setAdapter(adapter = new PhonesToSellAdapter());
-		lsPhones.setOnItemClickListener((parent, view, position, id) -> {
-			startActivity(new Intent(App.context, SellersActivity.class));
+
+		tProfit = V.get(this, R.id.tProfit);
+		tProfit.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+
+			}
+
+			@Override
+			public void afterTextChanged(final Editable s) {
+				try {
+					profit = Integer.parseInt(s.toString());
+				} catch (NumberFormatException e) {
+					profit = 0;
+				}
+				adapter.notifyDataSetChanged();
+			}
 		});
+
+		tProfit.setText("" + profit);
 
 		reload();
 	}
@@ -74,7 +98,7 @@ public class CommisionActivity extends ActionBarActivity {
 			Glide.with(CommisionActivity.this).load(p.img).into(imgPhone);
 			tName.setText(p.name);
 			tPriceOld.setText("$" + p.price_old);
-			tPriceNew.setText("$" + p.price_new);
+			tPriceNew.setText("$" + (p.price_old + profit));
 		}
 
 		@Override

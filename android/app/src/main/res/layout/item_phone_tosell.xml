@@ -6,7 +6,7 @@
 
 	<ImageView
 		android:id="@+id/imgPhone"
-		android:layout_width="120dp"
+		android:layout_width="100dp"
 		android:layout_height="match_parent"
 		android:src="#4000" />
 

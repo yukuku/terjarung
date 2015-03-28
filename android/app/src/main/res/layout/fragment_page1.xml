@@ -5,7 +5,7 @@
     android:padding="16dp"
 	android:orientation="vertical"
 	android:divider="@drawable/divider"
-	android:showDividers="middle">
+	android:showDividers="middle|end">
 
 	<FrameLayout
 		android:id="@+id/panelOperator1"

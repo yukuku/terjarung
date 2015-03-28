@@ -66,7 +66,7 @@ class AvailablePhonesHandler(ApiHandler):
                 'id': p[0],
                 'name': p[1],
                 'img': p[2],
-                'price': random.randint(100, 999),
+                'price': random.randint(10, 99)*10,
             }
             for p in phone_data.phones
         ]
@@ -79,8 +79,7 @@ class PhonesToSellHandler(ApiHandler):
                 'id': p[0],
                 'name': p[1],
                 'img': p[2],
-                'price_old': random.randint(100, 999),
-                'price_new': random.randint(100, 999),
+                'price_old': random.randint(10, 99)*10,
             }
             for p in phone_data.phones
         ]

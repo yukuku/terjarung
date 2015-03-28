@@ -6,40 +6,79 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-	<Spinner
+	<LinearLayout
+		android:orientation="horizontal"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/cbPlans" />
+		android:layout_height="wrap_content">
 
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceSmall"
-		android:text="80 mins talktime\n1999 SMS\n8 GB data\n$88 per month"
-		android:id="@+id/tPlanDetails"
-		android:layout_marginLeft="16dp"
-		android:layout_marginTop="8dp" />
+		<ImageView
+			android:layout_width="36dp"
+			android:layout_height="36dp"
+			android:id="@+id/imageView6"
+			android:src="@drawable/ic_icon_bundle"
+			android:layout_margin="16dp"
+			android:tint="#444" />
 
-
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceSmall"
-		android:text="Recontract on"
-		android:id="@+id/textView"
-		android:layout_marginTop="32dp"
-		android:textSize="18dp"
-		android:layout_gravity="center_horizontal" />
-
-	<TextView
-			android:id="@+id/textView3"
-			android:layout_width="wrap_content"
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-		android:text="12 Dec 2015"
-			android:textAppearance="?android:attr/textAppearanceLarge"
-			android:textSize="40dp"
-		android:layout_gravity="center_horizontal" />
+			android:padding="16dp">
 
+			<Spinner
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/cbPlans" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="80 mins talktime\n1999 SMS\n8 GB data\n$88 per month"
+				android:id="@+id/tPlanDetails"
+				android:layout_marginLeft="16dp"
+				android:layout_marginTop="8dp" />
+		</LinearLayout>
+	</LinearLayout>
+
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+
+		<ImageView
+			android:layout_width="36dp"
+			android:layout_height="36dp"
+			android:id="@+id/imageView7"
+			android:src="@drawable/ic_ic_event_48px"
+			android:layout_margin="16dp"
+			android:scaleType="center"
+			android:tint="#444" />
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="fill_parent"
+			android:padding="16dp">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="Recontract on"
+				android:id="@+id/textView"
+				android:textSize="18dp"
+				android:layout_marginLeft="4dp" />
+
+			<DatePicker
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/datePicker"
+				android:datePickerMode="spinner"
+				android:calendarViewShown="false" />
+		</LinearLayout>
+	</LinearLayout>
 
 
 </LinearLayout>
