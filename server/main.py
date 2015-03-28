@@ -98,15 +98,20 @@ class AvailablePhonesHandler(ApiHandler):
 
 class PhonesToSellHandler(ApiHandler):
     def handle(self):
-        return [
+        plan_id = int(self.request.get('plan_id'))
+        res = [
             {
                 'id': p[0],
                 'name': p[1],
                 'img': p[2],
-                'price_old': random.randint(10, 99) * 10,
+                'price_old': phone_data.pp[p[0]-1][plan_id-1],
             }
             for p in phone_data.phones
         ]
+
+        res = sorted(res, key=lambda x: -x['price_old'])
+
+        return res
 
 
 class SellersHandler(ApiHandler):

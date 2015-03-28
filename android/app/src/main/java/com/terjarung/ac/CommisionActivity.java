@@ -115,7 +115,7 @@ public class CommisionActivity extends ActionBarActivity {
 	}
 
 	void reload() {
-		Server.getYukuLayer().phones_to_sell(new Callback<YukuLayer.PhoneToSell[]>() {
+		Server.getYukuLayer().phones_to_sell((int) plan.id, new Callback<YukuLayer.PhoneToSell[]>() {
 			@Override
 			public void success(final YukuLayer.PhoneToSell[] phoneToSells, final Response response) {
 				CommisionActivity.this.phones = phoneToSells;

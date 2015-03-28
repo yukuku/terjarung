@@ -109,14 +109,13 @@ public interface YukuLayer {
 		public String name;
 		public String img;
 		public int price_old;
-		public int price_new;
 	}
 
 	@POST("/available_phones")
 	void available_phones(Callback<Phone[]> result);
 
 	@POST("/phones_to_sell")
-	void phones_to_sell(Callback<PhoneToSell[]> result);
+	void phones_to_sell(@Query("plan_id") int plan_id, Callback<PhoneToSell[]> result);
 
 	public static class SellersResult {
 		public Phone phone;
