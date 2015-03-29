@@ -1,3 +1,4 @@
+# coding=utf-8
 import random
 
 from base import *
@@ -93,6 +94,8 @@ class AvailablePhonesHandler(ApiHandler):
 
             res.append(el)
 
+        res = sorted(res, key=lambda x: -x['price'])
+
         return res
 
 
@@ -126,7 +129,7 @@ class SellersHandler(ApiHandler):
         res = {
             'sellers': [
                 {
-                    'area': random.choice(areas),
+                    'area': o.user + u'–' + areas[hash(o.user) % len(areas)],
                     'price': base_prices[json.loads(o.plan)['id']-1] + o.profit,
                     'user': o.user,
                 }

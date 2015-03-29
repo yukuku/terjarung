@@ -24,6 +24,7 @@ public class BuyActivity extends ActionBarActivity {
 	String clientToken;
 	YukuLayer.Phone phone;
 	YukuLayer.SellersResult.Seller seller;
+	View tBypass;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,9 @@ public class BuyActivity extends ActionBarActivity {
 			// REQUEST_CODE is arbitrary and is only used within this activity.
 			startActivityForResult(intent, REQCODE_buy);
 		});
+
+		tBypass = V.get(this, R.id.tBypass);
+		tBypass.setOnClickListener(v -> done());
 
 		displayPay();
 	}
@@ -89,23 +93,7 @@ public class BuyActivity extends ActionBarActivity {
 				Server.getYukuLayer().payment_method_nonce(paymentMethodNonce, "" + seller.price, new Callback<String>() {
 					@Override
 					public void success(final String s, final Response response) {
-
-						Server.getYukuLayer().meetup_add(new Gson().toJson(phone), seller.user, new Callback<YukuLayer.Meetup>() {
-							@Override
-							public void success(final YukuLayer.Meetup meetup, final Response response) {
-
-							}
-
-							@Override
-							public void failure(final RetrofitError error) {
-
-							}
-						});
-
-						startActivity(new Intent(App.context, SuccessBuyActivity.class)
-							.putExtra("phone", phone));
-						setResult(RESULT_OK);
-						finish();
+						done();
 					}
 
 					@Override
@@ -115,5 +103,24 @@ public class BuyActivity extends ActionBarActivity {
 				});
 			}
 		}
+	}
+
+	private void done() {
+		Server.getYukuLayer().meetup_add(new Gson().toJson(phone), seller.user, new Callback<YukuLayer.Meetup>() {
+			@Override
+			public void success(final YukuLayer.Meetup meetup, final Response response) {
+
+			}
+
+			@Override
+			public void failure(final RetrofitError error) {
+
+			}
+		});
+
+		startActivity(new Intent(App.context, SuccessBuyActivity.class)
+			.putExtra("phone", phone));
+		setResult(RESULT_OK);
+		finish();
 	}
 }
