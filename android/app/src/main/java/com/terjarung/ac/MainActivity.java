@@ -6,11 +6,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.terjarung.App;
@@ -40,6 +42,8 @@ public class MainActivity extends ActionBarActivity {
 
 	Set<YukuLayer.Meetup> shown = new LinkedHashSet<>();
 	Set<YukuLayer.Meetup> poppedup = new LinkedHashSet<>();
+	TextView tLogin;
+	ImageView imgLogin;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,30 @@ public class MainActivity extends ActionBarActivity {
 				reloader.postDelayed(this, 2000);
 			}
 		});
+
+		final ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setCustomView(R.layout.custom_profile);
+			actionBar.setDisplayShowCustomEnabled(true);
+			final View v = actionBar.getCustomView();
+			imgLogin = V.get(v, R.id.imgLogin);
+			tLogin = V.get(v, R.id.tLogin);
+		}
+
+		displayLogin();
+	}
+
+	private void displayLogin() {
+		if (imgLogin == null || tLogin == null) return;
+		final String a = Preferences.getString(Prefkeys.authtoken);
+		if (a == null) {
+			imgLogin.setVisibility(View.GONE);
+			tLogin.setVisibility(View.GONE);
+		} else {
+			imgLogin.setVisibility(View.VISIBLE);
+			tLogin.setVisibility(View.VISIBLE);
+			tLogin.setText(a);
+		}
 	}
 
 	Handler reloader = new Handler();
@@ -174,36 +202,39 @@ public class MainActivity extends ActionBarActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 
-		switch (id) {
-			case R.id.menuLoginSeller:
-				Preferences.setString(Prefkeys.authtoken, "seller1");
-				return true;
-			case R.id.menuLoginSeller2:
-				Preferences.setString(Prefkeys.authtoken, "seller2");
-				return true;
-			case R.id.menuLoginSeller3:
-				Preferences.setString(Prefkeys.authtoken, "seller3");
-				return true;
-			case R.id.menuLoginSeller4:
-				Preferences.setString(Prefkeys.authtoken, "seller4");
-				return true;
-			case R.id.menuLoginBuyer:
-				Preferences.setString(Prefkeys.authtoken, "buyer1");
-				return true;
-			case R.id.menuLoginBuyer2:
-				Preferences.setString(Prefkeys.authtoken, "buyer2");
-				return true;
-			case R.id.menuHost:
-				Preferences.setString(Prefkeys.baseurl, "http://10.0.3.2:20080");
-				Server.reloadBaseurl();
-				return true;
-			case R.id.menuAppspot:
-				Preferences.setString(Prefkeys.baseurl, "http://terjarung.appspot.com");
-				Server.reloadBaseurl();
-				return true;
+		try {
+			switch (id) {
+				case R.id.menuLoginSeller:
+					Preferences.setString(Prefkeys.authtoken, "seller1");
+					return true;
+				case R.id.menuLoginSeller2:
+					Preferences.setString(Prefkeys.authtoken, "seller2");
+					return true;
+				case R.id.menuLoginSeller3:
+					Preferences.setString(Prefkeys.authtoken, "seller3");
+					return true;
+				case R.id.menuLoginSeller4:
+					Preferences.setString(Prefkeys.authtoken, "seller4");
+					return true;
+				case R.id.menuLoginBuyer:
+					Preferences.setString(Prefkeys.authtoken, "buyer1");
+					return true;
+				case R.id.menuLoginBuyer2:
+					Preferences.setString(Prefkeys.authtoken, "buyer2");
+					return true;
+				case R.id.menuHost:
+					Preferences.setString(Prefkeys.baseurl, "http://10.0.3.2:20080");
+					Server.reloadBaseurl();
+					return true;
+				case R.id.menuAppspot:
+					Preferences.setString(Prefkeys.baseurl, "http://terjarung.appspot.com");
+					Server.reloadBaseurl();
+					return true;
+			}
+		} finally {
+			reload();
+			displayLogin();
 		}
-
-		reload();
 
 		return super.onOptionsItemSelected(item);
 	}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:baselineAligned="false"
+	android:gravity="center_vertical"
+	android:orientation="horizontal">
+
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="8dp"
+		android:fontFamily="sans-serif-medium"
+		android:text="@string/app_name"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:textColor="#fff" />
+
+	<ImageView
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/imageView8"
+		android:layout_weight="1" />
+
+	<ImageView
+		android:id="@+id/imgLogin"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/ic_action_account_circle"
+		android:tint="#fff" />
+
+	<TextView
+		android:id="@+id/tLogin"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="8dp"
+		android:text="null"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:textColor="#fff"
+		android:layout_marginRight="8dp" />
+</LinearLayout>
