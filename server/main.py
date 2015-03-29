@@ -32,6 +32,7 @@ class MainHandler(webapp2.RequestHandler):
 class ClientTokenHandler(ApiHandler):
     def handle(self):
         client_token = braintree.ClientToken.generate({
+            'customer_id': '35515229',
         })
         return client_token
 
@@ -44,6 +45,20 @@ class PaymentMethodNonceHandler(ApiHandler):
             "amount": amount,
             "payment_method_nonce": nonce,
         })
+        info(result)
+        info(nonce)
+
+
+class CreateCustomerHandler(ApiHandler):
+    def handle(self):
+        nonce = self.request.get('nonce')
+
+        result = braintree.Customer.create({
+            "first_name": "Randy",
+            "last_name": "Sugianto",
+            "payment_method_nonce": nonce,
+        })
+
         info(result)
 
 
@@ -244,4 +259,5 @@ app = webapp2.WSGIApplication([
     ('/my_meetups/?', MyMeetupsHandler),
     ('/meetup_update_status/?', MeetupUpdateStatusHandler),
     ('/meetup_add/?', MeetupAddHandler),
+    ('/create_customer/?', CreateCustomerHandler),
 ], debug=True)
